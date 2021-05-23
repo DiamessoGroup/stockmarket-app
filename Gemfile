@@ -54,3 +54,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# stock quote
+gem "stock_quote", '~> 3.0.0'
+
+# Figaro for setting environment variables
+gem 'figaro'
+
+# Devise for users authentication
+gem 'devise', '~> 4.8'

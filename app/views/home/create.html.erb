@@ -1,17 +1,18 @@
-<h1>Home#index</h1>
+<h1>Home#create</h1>
 
 <%= form_with url: root_path, method: :post do |form| %>
 <%= form.text_field :query, placeholder: "Enter Ticker Symbol", size: 30 %>
 <%= form.submit "Search" %>
 <% end %>
 
-<% if params[:query].present? && !@error %>
+<% if params[:query].present? %>
 <%= @stock.inspect %>
-<%= @stock.company_name %><br>
-$<%= @stock.latest_price %>
-<% elsif @nothing %>
-<%= @nothing %>
-<% elsif @error %>
-<%= @error %>
+<br>
+<br>
+<%= params[:query] %>
+
+<img src="<%= @url %>"
+     alt="Tesla">
+
 
 <% end %>
