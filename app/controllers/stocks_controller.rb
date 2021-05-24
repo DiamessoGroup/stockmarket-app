@@ -14,6 +14,7 @@ class StocksController < ApplicationController
 
   # GET /stocks/new
   def new
+    console
     @stock = Stock.new
   end
 
@@ -24,16 +25,23 @@ class StocksController < ApplicationController
   # POST /stocks or /stocks.json
   def create
     @stock = Stock.new(stock_params)
-
-    respond_to do |format|
-      if @stock.save
-        format.html { redirect_to @stock, notice: "Stock was successfully created." }
-        format.json { render :show, status: :created, location: @stock }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @stock.errors, status: :unprocessable_entity }
+    begin
+      if StockQuote::Stock.quote(@stock.ticker)
+        respond_to do |format|
+          if @stock.save
+            format.html { redirect_to @stock, notice: "Stock was successfully created." }
+            format.json { render :show, status: :created, location: @stock }
+          else
+            format.html { render :new, status: :unprocessable_entity }
+            format.json { render json: @stock.errors, status: :unprocessable_entity }
+          end
+        end
       end
+    rescue => e
+      flash.now[:notice] = "This stock is not valid. #{e}"
+      render :new
     end
+
   end
 
   # PATCH/PUT /stocks/1 or /stocks/1.json

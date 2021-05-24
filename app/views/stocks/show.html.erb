@@ -2,6 +2,23 @@
   <strong>Ticker:</strong>
   <%= @stock.ticker.upcase %>
 </p>
+<% ticker = StockQuote::Stock.quote(@stock.ticker) %>
+<p>
+  <strong>Company Name:</strong>
+  <%= ticker.company_name %>
+</p>
+<p>
+  <strong>Symbol:</strong>
+  <%= ticker.symbol %>
+</p>
+<p>
+  <strong>Latest Price:</strong>
+  $<%= number_with_precision ticker.latest_price, :precision => 2, :delimiter => "," %>
+</p>
+<p>
+  <strong>Market Cap:</strong>
+  $<%= number_with_precision ticker.market_cap, :precision => 0, :delimiter => "," %>
+</p>
 
 <%= link_to 'Edit', edit_stock_path(@stock) %> |
 <%= link_to 'Back', stocks_path %>
