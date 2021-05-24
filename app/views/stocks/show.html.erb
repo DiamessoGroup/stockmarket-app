@@ -3,6 +3,9 @@
   <%= @stock.ticker.upcase %>
 </p>
 <% ticker = StockQuote::Stock.quote(@stock.ticker) %>
+<% logo = StockQuote::Stock.logo(@stock.ticker) %>
+<img src="<%= logo.url %>"
+     alt="<%= ticker.company_name %> logo">
 <p>
   <strong>Company Name:</strong>
   <%= ticker.company_name %>

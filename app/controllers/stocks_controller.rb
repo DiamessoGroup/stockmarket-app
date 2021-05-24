@@ -14,7 +14,6 @@ class StocksController < ApplicationController
 
   # GET /stocks/new
   def new
-    console
     @stock = Stock.new
   end
 
