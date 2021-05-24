@@ -117,4 +117,19 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+
+  # Uncomment if you wish to allow Action Cable access from any origin.
+  # config.action_cable.disable_request_forgery_protection = true
+
+  # Devise:1. Ensure you have defined default url options in your environments files. Here
+  #    is an example of default_url_options appropriate for a development environment
+  #    in config/environments/development.rb:
+
+  #      config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  #    In production, :host should be set to the actual host of your application.
+
+  #    * Required for all applications. *
+  config.action_mailer.default_url_options = { host: 'stockmarket-app-rails.herokuapp.com' }
 end
