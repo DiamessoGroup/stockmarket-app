@@ -2,6 +2,8 @@
 
 one:
   ticker: MyString
+  user: one
 
 two:
   ticker: MyString
+  user: two
