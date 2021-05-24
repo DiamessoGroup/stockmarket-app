@@ -1,24 +1,38 @@
-<h1>Stocks</h1>
+<h1>Stock Portfolio</h1>
 
-<table>
-  <thead>
+<table class="table table-striped">
+  <thead class="table-dark">
     <tr>
+      <th>Company Name</th>
       <th>Ticker</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>Price</th>
+      <th>Market Cap</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @stocks.each do |stock| %>
     <% if stock.user == current_user %>
+    <% if stock.ticker
+        begin
+          @ticker = StockQuote::Stock.quote(stock.ticker)
+        rescue => e
+          @ticker.company_name = "N/A"
+          @ticker.symbol = "N/A"
+          @ticker.latest_price = "N/A"
+          @ticker.market_cap = "N/A" %>
+    <% end %>
+    <% end %>
     <tr>
-      <td><%= stock.ticker %></td>
-      <td><%= stock.user_id %></td>
-      <td><%= link_to 'Show', stock %></td>
+      <td><%= link_to @ticker.company_name, stock %></td>
+      <td><%= @ticker.symbol %></td>
+      <td>$<%= number_with_precision @ticker.latest_price, :precision => 2, :delimiter => "," %></td>
+      <td>$<%= number_with_precision @ticker.market_cap, :precision => 0, :delimiter => "," %></td>
       <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
       <td><%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
+
     <% end %>
     <% end %>
   </tbody>

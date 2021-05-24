@@ -1,6 +1,6 @@
 <p>
   <strong>Ticker:</strong>
-  <%= @stock.ticker %>
+  <%= @stock.ticker.upcase %>
 </p>
 
 <%= link_to 'Edit', edit_stock_path(@stock) %> |
